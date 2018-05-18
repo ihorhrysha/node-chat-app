@@ -12,10 +12,15 @@ var server = http.createServer(app);
 var io = socketio(server);
 
 io.on('connection', function (socket) {
-    console.log('a user connected');
 
-    socket.on('disconnect', () => {
-        console.log('Disonnected client');
+    socket.emit('newMessage',{
+        from: 'mike',
+        text: 'whats up',
+        time: new Date()
+    });
+
+    socket.on('createMessage',(message) => {
+        console.log('Message creation', message);
     });
 
 });
