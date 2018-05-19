@@ -1,9 +1,9 @@
 var socket = io();
 socket.on('connect', function () {
-    socket.emit('createMessage',{
-        from: 'Andrew',
-        text : 'Hello'
-    });
+    // socket.emit('createMessage',{
+    //     from: 'Andrew',
+    //     text : 'Hello'
+    // });
 });
 
 socket.on('newMessage',function (message){
