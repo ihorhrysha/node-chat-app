@@ -1,5 +1,6 @@
 const path = require('path');
 const {newMessageData} = require('./message/message');
+const {newLocationData} = require('./message/message');
 const express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
@@ -17,10 +18,16 @@ io.on('connection', function (socket) {
     socket.broadcast.emit('serverMessage', newMessageData('Admin', 'New User Joined'));
     socket.emit('serverMessage', newMessageData('Admin', 'Welcome to chat app'));
     
-    //recieving
+    //recieving message
     socket.on('clientMessage', (message, callback) => {
         io.emit('serverMessage', newMessageData(message.from, message.text));
-        callback('good');
+        callback();
+    });
+
+    //recieving geolocation
+    socket.on('clientGeolocation', (coords, callback) => {
+        io.emit('serverGeolocation', newLocationData('Admin', coords.latitude, coords.longitude));
+        callback();
     });
 
 });

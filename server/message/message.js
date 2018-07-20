@@ -6,4 +6,12 @@ var newMessageData = (from, text) => {
     };
 }
 
-module.exports = {newMessageData};
+var newLocationData = (from, latitude, longitude) => {
+    return {
+        from: from,
+        url: `https://www.google.com/maps?q=${latitude},${longitude}`,
+        time: new Date().getTime()
+    };
+}
+
+module.exports = {newMessageData,newLocationData};
